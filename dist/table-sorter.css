@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger,
+.sortable-table-autoinit thead th:not(.no-sort) {
+  cursor: pointer;
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger::after,
+.sortable-table thead th:not(.no-sort).sortable-table-trigger::before,
+.sortable-table-autoinit thead th:not(.no-sort)::after,
+.sortable-table-autoinit thead th:not(.no-sort)::before {
+  transition: color 0.1s ease-in-out;
+  font-size: 1.2em;
+  color: transparent;
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger::after,
+.sortable-table-autoinit thead th:not(.no-sort)::after {
+  margin-left: 3px;
+  content: "▸";
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger:hover::after,
+.sortable-table-autoinit thead th:not(.no-sort):hover::after {
+  color: inherit;
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger[data-order=descending]::after,
+.sortable-table-autoinit thead th:not(.no-sort)[data-order=descending]::after {
+  color: inherit;
+  content: "▾";
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger[data-order=ascending]::after,
+.sortable-table-autoinit thead th:not(.no-sort)[data-order=ascending]::after {
+  color: inherit;
+  content: "▴";
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger.indicator-left::after,
+.sortable-table-autoinit thead th:not(.no-sort).indicator-left::after {
+  content: "";
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger.indicator-left::before,
+.sortable-table-autoinit thead th:not(.no-sort).indicator-left::before {
+  margin-right: 3px;
+  content: "▸";
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger.indicator-left:hover::before,
+.sortable-table-autoinit thead th:not(.no-sort).indicator-left:hover::before {
+  color: inherit;
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger.indicator-left[data-order=descending]::before,
+.sortable-table-autoinit thead th:not(.no-sort).indicator-left[data-order=descending]::before {
+  color: inherit;
+  content: "▾";
+}
+
+.sortable-table thead th:not(.no-sort).sortable-table-trigger.indicator-left[data-order=ascending]::before,
+.sortable-table-autoinit thead th:not(.no-sort).indicator-left[data-order=ascending]::before {
+  color: inherit;
+  content: "▴";
+}
+
+.sortable-table-styled {
+  --stripe-bg: #e4e4e4;
+  --stripe-color: #000;
+  --stripe-bg-odd: #fff;
+  --stripe-color-odd: #111;
+  --th-bg: #808080;
+  --th-color: #fff;
+  border-spacing: 0;
+}
+
+.sortable-table-styled.sticky thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.sortable-table-styled tbody tr {
+  background-color: var(--stripe-bg);
+  color: var(--stripe-color);
+}
+
+.sortable-table-styled tbody tr:nth-child(odd) {
+  background-color: var(--stripe-bg-odd);
+  color: var(--stripe-color-odd);
+}
+
+.sortable-table-styled thead th {
+  background: var(--th-bg);
+  color: var(--th-color);
+  font-weight: normal;
+  text-align: left;
+  text-transform: capitalize;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.sortable-table-styled thead td:first-child,
+.sortable-table-styled thead th:first-child {
+  border-top-left-radius: 4px;
+}
+
+.sortable-table-styled thead td:last-child,
+.sortable-table-styled thead th:last-child {
+  border-top-right-radius: 4px;
+}
+
+.sortable-table-styled td,
+.sortable-table-styled th {
+  padding: 10px;
+}

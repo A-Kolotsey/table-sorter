@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@materializecss/materialize@2.3.3/dist/css/materialize.min.css">
+  <link href="./dist/table-sorter.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Searchable demo</title>
+
+  <script type="module">
+    /*
+          Init module sorting BEGIN
+    */
+
+    import { tSortTrigger, tSortInit } from './dist/table-sorter.js';
+    window.tSortTrigger = tSortTrigger; // Declaring a column sorting trigger globally
+    tSortInit(); // Initializing all tables with a selector "table.sortable-table" or "table.sortable-table-autoinit"
+    tSortInit('#m_table4');
+
+    /* Init #m_table5 as DOM elemett */
+    const mTable5 = document.getElementById('m_table5');
+    tSortInit(mTable5);
+    /* Init #m_table5 as DOM elemett */
+    
+
+    /*
+          Init module sorting END
+    */
+  </script>
+  <script>
+    function btClick(e) {
+      let btNum = e?.event?.target?.innerText ?? e?.target?.innerText;
+      alert('Test message from button # ' + btNum);
+    } 
+  </script>
+</head>
+
+<body>
+
+  <h3>Autoinit Sortable Table. All colums trigger</h3>
+  <p>Testing performance with 5 rows.</p>
+  <table id="m_table2" class="sortable-table sortable-table-autoinit">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Stock</th>
+        <th data-type="number" data-order="ascending">onClick</th>
+        <th data-type="number" data-order="ascending">EventListener</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>Autoinit Sortable Table. Custom colums trigger. The style has been applied</h3>
+  <p>Testing performance with 5 rows.</p>
+  <table id="m_table3" class="sortable-table sortable-table-styled">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th class="sortable-table-trigger">Price</th>
+        <th>Category</th>
+        <th class="sortable-table-trigger">Stock</th>
+        <th class="sortable-table-trigger" data-type="number" data-order="ascending">onClick</th>
+        <th data-type="number" data-order="ascending">EventListener</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>Init Sortable Table by element ID, with custom colums.</h3>
+  <p>Testing performance with 5 rows.</p>
+  <table id="m_table4" class="sortable-table-styled">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th class="sortable-table-trigger">Price</th>
+        <th>Category</th>
+        <th class="sortable-table-trigger">Stock</th>
+        <th class="sortable-table-trigger" data-type="number" data-order="ascending">onClick</th>
+        <th data-type="number" data-order="ascending">EventListener</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>Init Sortable Table by element ID, for all colums.</h3>
+  <p>Testing performance with 5 rows.</p>
+  <table id="m_table5" class="sortable-table-styled">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Stock</th>
+        <th data-type="number" data-order="ascending">onClick</th>
+        <th data-type="number" data-order="ascending">EventListener</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+
+
+  <h3>Massive Sortable Table. Custom onClick init.</h3>
+
+  <p>Testing performance with 5000 rows.</p>
+
+  <table id="m_table" class="">
+    <thead>
+      <tr>
+        <th onclick="tSortTrigger()" data-cell="0" data-type="text">Product</th>
+        <th onclick="tSortTrigger(self)">Price</th>
+        <th onclick="tSortTrigger(self)" data-cell="2" data-type="text">Category</th>
+        <th onclick="tSortTrigger(self)" data-cell="3" data-order="none" data-type="number">Stock</th>
+        <th onclick="tSortTrigger(this)" data-cell="4" data-order="ascending" data-type="number">onClick</th>
+        <th onclick="tSortTrigger(this)" data-order="ascending" data-type="number">EventListener</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+
+  <script>
+
+    function seedTable(table, count) {
+      const products = [
+        { name: 'Laptop', price: { text: '$999', val: 999 }, category: 'Electronics', stock: 15 },
+        { name: 'Smartphone', price: { text: '$699', val: 699 }, category: 'Electronics', stock: 30 },
+        { name: 'Desk Chair', price: { text: '$89', val: 89 }, category: 'Furniture', stock: 20 },
+        { name: 'Water Bottle', price: { text: '$15', val: 15 }, category: 'Accessories', stock: 100 },
+        { name: 'Headphones', price: { text: '$199', val: 199 }, category: 'Electronics', stock: 25 },
+        { name: 'Backpack', price: { text: '$49', val: 49 }, category: 'Accessories', stock: 40 },
+        { name: 'Monitor', price: { text: '$249', val: 249 }, category: 'Electronics', stock: 10 },
+        { name: 'Keyboard', price: { text: '$79', val: 79 }, category: 'Electronics', stock: 35 },
+        { name: 'Mouse', price: { text: '$39', val: 39 }, category: 'Electronics', stock: 50 },
+        { name: 'Notebook', price: { text: '$5', val: 5 }, category: 'Office', stock: 109 },
+      ]
+
+      const tbody = table.querySelector('tbody')
+      for (let i = 0; i < count; i++) {
+        const product = products[i % products.length]
+        const row = document.createElement('tr')
+        row.innerHTML = `
+            <td>${product.name}</td>
+            <td data-sort_value="${product.price.val}">${product.price.text}</td>
+            <td>${product.category}</td>
+            <td>${product.stock}</td>
+            <td data-sort_value="${i}"><button class="btn" type="button" onclick="btClick(self);">${i}</button></td>
+            <td data-sort_value="${i}"><button class="btn set-event-listener" type="button">${i}</button></td>
+          `;
+        tbody.appendChild(row)
+      }
+      table.querySelectorAll(`button.set-event-listener`).forEach(el => {
+        el.addEventListener('click', event => {
+          btClick(event);
+        });
+      });
+    }
+
+    const sortableTable = document.getElementById('m_table2')
+    seedTable(sortableTable, 5)
+    const sortableTableStyled = document.getElementById('m_table3')
+    seedTable(sortableTableStyled, 5)
+    const sortableTableId = document.getElementById('m_table4')
+    seedTable(sortableTableId, 5)
+    const sortableTableId2 = document.getElementById('m_table5')
+    seedTable(sortableTableId2, 5)
+    const massiveTable = document.getElementById('m_table')
+    seedTable(massiveTable, 5000)
+
+
+  </script>
+</body>
+
+</html>
