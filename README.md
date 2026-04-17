@@ -3,6 +3,7 @@ A JavaScript module that sorts the contents of a table element.
 
 ### get started
 ```html
+  <link href="./dist/table-sorter.css" rel="stylesheet" />
   <script type="module">
     import { tSortTrigger, tSortInit } from './dist/table-sorter.js';
     window.tSortTrigger = tSortTrigger; // Declaring a column sorting trigger globally
